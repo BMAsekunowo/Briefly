@@ -13,6 +13,12 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 # Auto-discover tasks in all installed apps
 app.autodiscover_tasks()
 
+# ✅ Explicitly imported nested task modules so Celery can register them
+@app.on_after_finalize.connect
+def setup_periodic_tasks(sender, **kwargs):
+    import emails.tasks.email_parse
+    import celery_tasks.whatsapp.tasks
+
 
 @app.task(bind=True)
 def debug_task(self):
