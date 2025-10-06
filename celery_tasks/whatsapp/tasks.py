@@ -1,6 +1,6 @@
 from celery import shared_task
 from django.contrib.auth import get_user_model
-from datetime import datetime
+from summaries.models import Summary
 
 User = get_user_model()
 
@@ -8,23 +8,23 @@ User = get_user_model()
 def send_whatsapp_summary(user_id):
     try:
         user = User.objects.get(id=user_id)
-        
-        # Mock summary generation
-        summary = f"""
-        👋 Hello {user.username}!
-        
-        Here's your daily brief for {datetime.now().strftime('%A, %B %d, %Y')}:
 
-        • 📧 You received 3 new emails today
-        • ✅ 2 tasks were completed
-        • 🔔 1 reminder is pending
+        # 🧠 Fetch the latest summary created for the user
+        summary = Summary.objects.filter(user=user).order_by('-created_at').first()
 
-        – Briefly 🧠
-        """
+        if summary:
+            # Simulate sending the summary content via WhatsApp
+            print(f"📤 WhatsApp Summary to {user.username}:\n{summary.content}")
 
-        print(f"📤 WhatsApp Message to {user.username}:\n{summary}")
+            # Mark the summary as delivered
+            summary.delivered = True
+            summary.save()
 
-        return f"WhatsApp mock sent for user {user.username}"
+            return f"✅ WhatsApp summary sent and marked delivered for {user.username}"
+
+        else:
+            print(f"⚠️ No summary found for {user.username}")
+            return "No summary to send"
 
     except User.DoesNotExist:
         print(f"❌ User with ID {user_id} not found.")

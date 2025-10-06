@@ -39,10 +39,12 @@ Briefly/
 ├── dashboard/
 ├── emails/
 ├── integrations/
+├── media/
 ├── notifications/
 ├── reminders/
 ├── static/
 ├── templates/
+├── visual/
 ├── Briefly/
 │   └── settings.py
 └── manage.py
