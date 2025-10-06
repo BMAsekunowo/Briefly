@@ -43,6 +43,7 @@ Briefly/
 ├── notifications/
 ├── reminders/
 ├── static/
+├── summaries/
 ├── templates/
 ├── visual/
 ├── Briefly/

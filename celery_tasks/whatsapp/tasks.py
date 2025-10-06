@@ -17,7 +17,7 @@ def send_whatsapp_summary(user_id):
             print(f"📤 WhatsApp Summary to {user.username}:\n{summary.content}")
 
             # Mark the summary as delivered
-            summary.delivered = True
+            summary.delivered = True 
             summary.save()
 
             return f"✅ WhatsApp summary sent and marked delivered for {user.username}"
