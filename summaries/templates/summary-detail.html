@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Summary Detail{% endblock %}
+
+{% block content %}
+  <h1>📝 Summary Detail</h1>
+  <div class="card">
+    <h2>Subject: {{ summary.subject }}</h2>
+    <p><strong>Date:</strong> {{ summary.created_at }}</p>
+    <p><strong>Content:</strong></p>
+    <pre>{{ summary.content }}</pre>
+  </div>
+  <a href="{% url 'user_summaries' %}">← Back to My Summaries</a>
+{% endblock %}

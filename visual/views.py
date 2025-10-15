@@ -5,5 +5,5 @@ def homePage(req):
     
     return render(
         request=req, 
-        template_name = 'visual/index.html'
+        template_name = 'index.html'
     )

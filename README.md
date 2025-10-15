@@ -36,6 +36,7 @@ Briefly/
 ├── api/
 ├── celery_tasks/
 ├── core/
+│   └── settings.py
 ├── dashboard/
 ├── emails/
 ├── integrations/
@@ -45,9 +46,8 @@ Briefly/
 ├── static/
 ├── summaries/
 ├── templates/
+├── users/
 ├── visual/
-├── Briefly/
-│   └── settings.py
 └── manage.py
 ```
 
