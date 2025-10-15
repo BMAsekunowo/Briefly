@@ -1,10 +1,22 @@
 from celery import shared_task
+from django.contrib.auth import get_user_model
+from summaries.models import Summary, EmailSummaryTrigger
+
+User = get_user_model()
 
 @shared_task
-def test_celery_task():
-    print("✅ Celery task executed successfully.")
-    return "This is a response from your first Celery task"
+def generate_summary_from_email(user_id, email_subject, email_body):
+    try:
+        user = User.objects.get(id=user_id)
+        content = f"📥 New Email Summary:\nSubject: {email_subject}\n\n{email_body}"
 
-@shared_task
-def scheduled_hello():
-    print("👋 This task runs on a schedule via Celery Beat.")
+        Summary.objects.create(user=user, content=content)
+        EmailSummaryTrigger.objects.create(
+            user=user,
+            trigger_type="new_email",
+            triggered_by="system"
+        )
+        return f"Summary generated for {user.email}"
+
+    except User.DoesNotExist:
+        return "User not found"

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Your Summaries{% endblock %}
+{% block extra_css %}
+{% load static%}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>📥 My Summaries</h2>
+
+    {% if summaries %}
+        <ul>
+            {% for summary in summaries %}
+                <li>
+                    <strong>{{ summary.summary_type }}</strong> - 
+                    {{ summary.content|truncatechars:100 }}<br>
+                    <em>{{ summary.created_at }}</em>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You don't have any summaries yet.</p>
+    {% endif %}
+    {% block extra_js %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,21 @@
+.cont {
+  font-family: sans-serif;
+  background: #f4f4f4;
+  padding: 0 2rem;
+}
+
+h1 {
+  color: #222;
+}
+
+.card {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.summary {
+  font-size: 0.9rem;
+  color: #444;
+}
